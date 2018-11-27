@@ -1,0 +1,40 @@
+<project name="Helloworld" default="clean" basedir=".">
+    <description>
+        Build file to build Helloworld app
+    </description>
+ 
+<property file="build.properties"/>
+
+	<target name="clean" description="removes previous build" >
+		<delete file="dist/helloworld.war"/>
+	</target>
+   
+   <target name="init">
+		<mkdir dir="dist" />
+	</target>
+   
+   <target name="war" depends="init">
+		<war destfile="dist/helloworld.war" webxml="helloworld/WEB-INF/web.xml">
+			<fileset dir="helloworld"/>
+			<lib dir="helloworld/WEB-INF/lib"/>
+		</war>
+	</target>
+	
+	<target name="undeploy" description="undeploy previous app" depends="war" >
+
+		<delete file="${apachewebapp}/helloworld.war"/>
+		<delete includeemptydirs="true" failonerror="false">  
+       		<fileset dir="${apachewebapp}/helloworld" includes="**/*"/>  
+       	</delete>
+
+   </target>
+   
+	<target name="deploy" depends="undeploy">
+		<copy todir="${apachewebapp}">
+		<resources>
+			<file file="dist/helloworld.war"/>
+		</resources>
+		</copy>
+	</target>
+	
+</project>
