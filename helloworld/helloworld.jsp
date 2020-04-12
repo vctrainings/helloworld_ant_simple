@@ -10,6 +10,6 @@ String message = "Hello, WORLD.";
 <h2><%= message%></h2>
 <%= new java.util.Date() %>
 
-<h2>I'm built with Apache Ant..!!! for Chandra</h2>
+<h2>I'm built with Apache Ant..!!!</h2>
 </body>
 </html>
